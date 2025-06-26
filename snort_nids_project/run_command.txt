@@ -1,0 +1,42 @@
+# ========================================
+# Run Command for Snort - Network IDS Task
+# ========================================
+
+# 🔧 Snort Command Used:
+snort -i 4 -A console -c C:\Snort\etc\snort.conf -l C:\Snort\log
+
+# 📌 Description of Flags:
+# -i 4           : Specifies the network interface number (in my case, interface 4 - my active Wi-Fi adapter)
+# -A console     : Displays alerts directly in the console window
+# -c [path]      : Specifies the configuration file to use
+# -l [path]      : Specifies the directory where Snort should log events
+
+# ✅ Steps Taken to Run Snort:
+1. Opened Command Prompt as Administrator.
+2. Navigated to the Snort binary folder using:
+   cd C:\Snort\bin
+3. Listed available network interfaces using:
+   snort -W
+4. Noted that interface 4 corresponds to my active Wi-Fi connection:
+   Intel(R) Dual Band Wireless-AC 7260
+5. Ran the Snort IDS using the command above.
+6. Opened another command prompt window and executed:
+   ping 8.8.8.8
+7. Snort successfully detected ICMP packets and displayed the following alert:
+   [**] [1:1000001:1] ICMP Packet Detected [**]
+
+# 📁 Output Location:
+- Alerts were printed on the console window.
+- Logs were saved in: C:\Snort\log
+- Screenshot taken: screenshots/icmp_alert_console.png
+
+# 🗓️ Date of Execution:
+June 24, 2025
+
+# 🧪 Sample Rule Used in local.rules:
+alert icmp any any -> any any (msg:"ICMP Packet Detected"; sid:1000001; rev:1;)
+
+# ✏️ Notes:
+- Make sure Npcap is installed with WinPcap compatibility.
+- Run CMD as administrator, or Snort may fail to access the network interface.
+- Ensure Wi-Fi or Ethernet connection is active during monitoring.
